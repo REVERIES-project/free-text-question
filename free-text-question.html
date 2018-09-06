@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`free-text-question`
+Une question libre
+
+@demo demo/index.html
+-->
+
+<dom-module id="free-text-question">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'free-text-question',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'free-text-question',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
