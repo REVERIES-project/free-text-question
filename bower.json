@@ -10,7 +10,7 @@
     "iron-collapse": "PolymerElements/iron-collapse#^2.2.1",
     "common-styles": "REVERIES-project/common-styles#^0.0.1",
     "activity-feedback": "REVERIES-project/activity-feedback#^0.0.2",
-    "staticmedia-viewer": "REVERIES-project/staticmedia-viewer#^0.0.3"
+    "staticmedia-viewer": "REVERIES-project/staticmedia-viewer#^0.0.4"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -21,6 +21,9 @@
   "resolutions": {
     "paper-icon-button": "^1.0.0",
     "paper-styles": "^1.0.0",
-    "paper-input": "^1.0.0"
+    "paper-input": "^1.0.0",
+    "iron-collapse": "^2.2.1",
+    "webcomponentsjs": "^v1.1.0",
+    "marked-element": "^2.4.0"
   }
 }

@@ -1,21 +1,9 @@
 # \<free-text-question\>
 
-Une question libre
+Une question dont la réponse est libre (champ texte).
 
-## Install the Polymer-CLI
+Il est possible d'associer un indice à la question sous forme d'un static-media.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
+L'utilisateur est informé de son résultat via les paramètres correctMessage et wrongMessage
 
-## Viewing Your Element
-
-```
-$ polymer serve
-```
-
-## Running Tests
-
-```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+# Documentation et demo
