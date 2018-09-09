@@ -4,19 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>free-text-question demo</title>
+    <title>prefixed-textarea demo</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../free-text-question.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
   </head>
-  <body unresolved>
-      <h3>Basic staticmedia-viewer demo</h3>
-
-    <div style="display:flex;justify-content: center;" class="vertical-section-container centered">
-      <free-text-question wrong-message="Ben non! Essayez encore!" correct-message="Bravo, c'est un cheval blanc!" question="Quelle est la couleur du cheval blanc?" response="blanc"></free-text-question>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic prefixed-textarea demo</h3>
+      <demo-snippet>
+        <template>
+          <free-text-question question="Comment ça va?"></free-text-question> 
+        </template>
+      </demo-snippet>
     </div>
   </body>
 </html>
