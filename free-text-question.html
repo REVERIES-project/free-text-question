@@ -47,7 +47,7 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
 
                 <iron-collapse opened=[[showClue]] id="clue">
                 </iron-collapse>
-                <activity-feedback id="feedback" correct-message=[[correctMessage]] wrong-message=[[wrongMessage]]></activity-feedback>
+                <activity-feedback id="feedback" response-status=[[responseStatus]] correct-message=[[correctMessage]] wrong-message=[[wrongMessage]]></activity-feedback>
                 <paper-icon-button class="validator" src="check.png" on-click="validate"></paper-icon-button>
             </div>
         </div>
@@ -68,20 +68,26 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
                     }
                 },
                 hideMessages:function(){
-                    this.$.feedback.hideAll();
+                    this.responseStatus=""
                 }
                 ,
                 validate: function () {
                     if (this.response === this.userResponse) {
-                        this.$.feedback.showCorrect();
+                        this.responseStatus="correct"
                     } else {
-                        this.$.feedback.showWrong();
+                        this.responseStatus="wrong"
                     }
                 },
                 observers: [
                     '_mediaObserver(media._id)',
                 ],
                 properties: {
+                    responseStatus:{
+                        type: String,
+                        notify : true,
+                        value:'',
+                        reflectToAttribute : true,
+                    },
                     question: {
                         type: String,
                         notify: true,
