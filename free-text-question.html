@@ -82,25 +82,41 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
                     '_mediaObserver(media._id)',
                 ],
                 properties: {
+                    /*
+                    * This property inform if the question has been answered (click on check)
+                    * and if the response is "correct" or "wrong"
+                    */
                     responseStatus:{
                         type: String,
                         notify : true,
                         value:'',
                         reflectToAttribute : true,
                     },
+                    /*
+                    The question to ask
+                    */
                     question: {
                         type: String,
                         notify: true,
                     },
+                    /*
+                    The correct response
+                    */
                     response: {
                         type: String,
                         notify: true,
 
                     },
+                    /*
+                    Message to show if the correct response is given
+                    */
                     correctMessage: {
                         type: String,
                         notify: true,
                     },
+                    /*
+                    Message to show if the response isn't correct
+                    */
                     wrongMessage: {
                         type: String,
                         notify: true,
