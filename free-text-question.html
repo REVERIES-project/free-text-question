@@ -41,11 +41,11 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
             <div class="question">{{question}}</div>
             <div class="resourceBody">
                 <paper-input name="response" class="response" value="{{userResponse}}"  label="{{responseLabel}}"></paper-input>
-                <template is="dom-if" if="{{showMediaButton}}" restamp=true>
+                <template is="dom-if" if="[[media]]" restamp=true>
                     <paper-toggle-button checked={{showClue}}>Indice</paper-toggle-button>
                 </template>
-
                 <iron-collapse opened=[[showClue]] id="clue">
+                    <staticmedia-viewer mkdown=[[media]]></staticmedia-viewer>
                 </iron-collapse>
                 <activity-feedback id="feedback" response-status=[[responseStatus]] correct-message=[[correctMessage]] wrong-message=[[wrongMessage]]></activity-feedback>
                 <paper-icon-button class="validator" src="check.png" on-click="validate"></paper-icon-button>
@@ -57,16 +57,6 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
             'use strict';
             Polymer({
                 is: 'free-text-question',
-                _mediaObserver: function (newval) {
-                    if (newval) {
-                        var temp = true
-                        this.set('showMediaButton', true)
-                    } else {
-                        this.set('showMediaButton', false)
-                        this.showMediaButton = false
-
-                    }
-                },
                 hideMessages:function(){
                     this.responseStatus=""
                 }
@@ -78,9 +68,6 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
                         this.responseStatus="wrong"
                     }
                 },
-                observers: [
-                    '_mediaObserver(media._id)',
-                ],
                 properties: {
                     /*
                     * This property inform if the question has been answered (click on check)
