@@ -41,7 +41,7 @@ L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise répons
         <div class="resource">
             <div class="question">[[question]]</div>
             <div class="resourceBody">
-                <paper-input name="response" class="response" value="{{userResponse}}"  label="{{responseLabel}}"></paper-input>
+                <paper-input name="response" class="response" value="{{userResponse}}"  label="[[responseLabel]]"></paper-input>
                 <template is="dom-if" if="[[media]]" restamp=true>
                     <paper-toggle-button checked={{showClue}}>Indice</paper-toggle-button>
                 </template>
