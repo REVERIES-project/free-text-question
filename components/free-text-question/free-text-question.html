@@ -1,0 +1,140 @@
+<!--
+@license
+Copyright (c) 2018 Pierre-Yves Gicquel. 
+This code may only be used under the "Do whatever you want with code license"
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../common-styles/common-styles.html">
+<link rel="import" href="../activity-feedback/activity-feedback.html">
+<link rel="import" href="../staticmedia-viewer/staticmedia-viewer.html">
+
+<!--
+`free-text-question`
+Une question pour laquelle la réponse est libre (champ texte).
+Il est possible d'associer un indice à la question sous forme d'un static-media
+L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise réponse 
+ via les paramètres correct-message et wrong-message
+@demo demo/index.html
+-->
+
+<dom-module id="free-text-question">
+    <style include="common-styles">
+        .question {
+            margin-top: 10px;
+            padding: 8px;
+            @apply(--paper-font-body2);
+        }
+
+        .response {
+            width: 100%;
+        }
+
+        .validator {
+            margin-top: 30px;
+        }
+    </style>
+    <template>
+        <div class="resource">
+            <div class="question">[[question]]</div>
+            <div class="resourceBody">
+                <paper-input name="response" class="response" value="{{userResponse}}"  label="[[responseLabel]]"></paper-input>
+                <template is="dom-if" if="[[media]]" restamp=true>
+                    <paper-toggle-button checked={{showClue}}>Indice</paper-toggle-button>
+                </template>
+                <iron-collapse opened=[[showClue]] id="clue">
+                    <staticmedia-viewer mkdown=[[media.mkdown]]></staticmedia-viewer>
+                </iron-collapse>
+                <activity-feedback id="feedback" response-status=[[responseStatus]] correct-message=[[correctMessage]] wrong-message=[[wrongMessage]]></activity-feedback>
+                <paper-icon-button class="validator" src="check.png" on-click="validate"></paper-icon-button>
+            </div>
+        </div>
+    </template>
+    <script>
+        (function () {
+            'use strict';
+            Polymer({
+                is: 'free-text-question',
+                /*
+                * Remet la question dans l'état initial (pas de clic sur valider)
+                * Les messages de feedback sont cachés
+                */
+                resetQuestion:function(){
+                    this.responseStatus=""
+                }
+                ,
+                /*
+                * Fonction de validation, compare la réponse entrée par l'utilisateur 
+                * à la réponse demandée par le créateur de la question
+                */
+                validate: function () {
+                    if (this.response === this.userResponse) {
+                        this.responseStatus="correct"
+                    } else {
+                        this.responseStatus="wrong"
+                    }
+                },
+                properties: {
+                    /*
+                    * Cette propriété permet de savoir si l'utilisateur à répondu (clic sur check)
+                    * Lors d'une réponse, elle prend la valeur "correct" ou "wrong"
+                    */
+                    responseStatus:{
+                        type: String,
+                        notify : true,
+                        value:'',
+                        reflectToAttribute : true,
+                    },
+                    /*
+                    * La question posée à l'utilisateur (ex. Quelle est la famille de l'arbre devant vous?)
+                    */
+                    question: {
+                        type: String,
+                        notify: true,
+                    },
+                    /*
+                    * La réponse correcte attendue
+                    */
+                    response: {
+                        type: String,
+                        notify: true,
+
+                    },
+                    /*
+                    * Message à afficher si la réponse correcte est donnée
+                    */
+                    correctMessage: {
+                        type: String,
+                        notify: true,
+                    },
+                    /*
+                    * Message à afficher si la réponse donnée n'est pas correcte
+                    */
+                    wrongMessage: {
+                        type: String,
+                        notify: true,
+                    },
+                    /*
+                    * Objet indice associé à la question. Il s'agit d'un objet de type static-media
+                    */
+                    media: {
+                        type: Object,
+                        notify: true,
+                    },
+                    /*
+                    * Identifiant de l'objet question dans la base de donné
+                    * Utilisé lors de la modification d'une question dans l'éditeur
+                    */
+                    itemId: {
+                        type: String,
+                        notify: true,
+                    },
+
+                }
+            });
+        })();
+    </script>
+</dom-module>
