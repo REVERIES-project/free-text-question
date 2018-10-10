@@ -14,10 +14,9 @@ This code may only be used under the "Do whatever you want with code license"
 
 <!--
 `free-text-question`
-Une question pour laquelle la réponse est libre (champ texte).
+Une question pour la suelle la réponse est libre (champ texte).
 Il est possible d'associer un indice à la question sous forme d'un static-media
-L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise réponse 
- via les paramètres correct-message et wrong-message
+L'utilisateur est informé de son résultat via les paramètres correctMessage et wrongMessage
 @demo demo/index.html
 -->
 
@@ -39,9 +38,9 @@ L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise répons
     </style>
     <template>
         <div class="resource">
-            <div class="question">[[question]]</div>
+            <div class="question">{{question}}</div>
             <div class="resourceBody">
-                <paper-input name="response" class="response" value="{{userResponse}}"  label="[[responseLabel]]"></paper-input>
+                <paper-input name="response" class="response" value="{{userResponse}}"  label="{{responseLabel}}"></paper-input>
                 <template is="dom-if" if="[[media]]" restamp=true>
                     <paper-toggle-button checked={{showClue}}>Indice</paper-toggle-button>
                 </template>
@@ -58,18 +57,10 @@ L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise répons
             'use strict';
             Polymer({
                 is: 'free-text-question',
-                /*
-                * Remet la question dans l'état initial (pas de clic sur valider)
-                * Les messages de feedback sont cachés
-                */
-                resetQuestion:function(){
+                hideMessages:function(){
                     this.responseStatus=""
                 }
                 ,
-                /*
-                * Fonction de validation, compare la réponse entrée par l'utilisateur 
-                * à la réponse demandée par le créateur de la question
-                */
                 validate: function () {
                     if (this.response === this.userResponse) {
                         this.responseStatus="correct"
@@ -79,8 +70,8 @@ L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise répons
                 },
                 properties: {
                     /*
-                    * Cette propriété permet de savoir si l'utilisateur à répondu (clic sur check)
-                    * Lors d'une réponse, elle prend la valeur "correct" ou "wrong"
+                    * This property inform if the question has been answered (click on check)
+                    * and if the response is "correct" or "wrong"
                     */
                     responseStatus:{
                         type: String,
@@ -89,51 +80,50 @@ L'utilisateur peut avoir un feedback en fonction de sa bonne ou mauvaise répons
                         reflectToAttribute : true,
                     },
                     /*
-                    * La question posée à l'utilisateur (ex. Quelle est la famille de l'arbre devant vous?)
+                    The question to ask
                     */
                     question: {
                         type: String,
                         notify: true,
+                        observer : '_resetQuestion',
                     },
                     /*
-                    * La réponse correcte attendue
+                    The correct response
                     */
                     response: {
                         type: String,
                         notify: true,
+                        observer : '_resetQuestion',
 
                     },
                     /*
-                    * Message à afficher si la réponse correcte est donnée
+                    Message to show if the correct response is given
                     */
                     correctMessage: {
                         type: String,
                         notify: true,
+                        observer : '_resetQuestion',
                     },
                     /*
-                    * Message à afficher si la réponse donnée n'est pas correcte
+                    Message to show if the response isn't correct
                     */
                     wrongMessage: {
                         type: String,
                         notify: true,
+                        observer : '_resetQuestion',
                     },
-                    /*
-                    * Objet indice associé à la question. Il s'agit d'un objet de type static-media
-                    */
                     media: {
                         type: Object,
                         notify: true,
-                    },
-                    /*
-                    * Identifiant de l'objet question dans la base de donné
-                    * Utilisé lors de la modification d'une question dans l'éditeur
-                    */
-                    itemId: {
-                        type: String,
-                        notify: true,
+                        observer : '_resetQuestion',
                     },
 
-                }
+                },
+                _resetQuestion:function(){
+                    this.responseStatus=''
+                    this.userResponse=''
+                },
+
             });
         })();
     </script>
