@@ -62,7 +62,7 @@ L'utilisateur est informé de son résultat via les paramètres correctMessage e
                 }
                 ,
                 validate: function () {
-                    if (this.response === this.userResponse) {
+                    if (this.response.toLowerCase() === this.userResponse.toLowerCase()) {
                         this.responseStatus="correct"
                     } else {
                         this.responseStatus="wrong"
